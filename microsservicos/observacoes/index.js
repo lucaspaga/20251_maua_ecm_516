@@ -66,6 +66,9 @@ app.post('/eventos', async (req, res) => {
     console.log(evento)
     funcoes[evento.tipo](evento.dados)
   }
+  catch(e){
+    console.log(e)
+  }
   finally{
     res.end()
   }
