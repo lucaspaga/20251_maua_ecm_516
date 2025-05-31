@@ -1,0 +1,13 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "node --watch index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
