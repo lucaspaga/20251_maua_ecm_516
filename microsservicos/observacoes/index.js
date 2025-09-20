@@ -25,7 +25,7 @@ const funcoes = {
     const observacoes = baseObservacoes[observacao.idLembrete]
     const obsParaAtualizar = observacoes.find(o => o.id === observacao.id)
     obsParaAtualizar.status = observacao.status
-    await axios.post('http://localhost:10000/eventos', {
+    await axios.post('http://ecm516-barramento-de-eventos-service:10000/eventos', {
       tipo: 'ObservacaoAtualizada',
       dados: observacao
     })
@@ -53,7 +53,7 @@ app.post('/lembretes/:idLembrete/observacoes', async (req, res) => {
   const observacoes = baseObservacoes[idLembrete] || []
   observacoes.push(observacao)
   baseObservacoes[idLembrete] = observacoes
-  await axios.post('http://localhost:10000/eventos', {
+  await axios.post('http://ecm516-barramento-de-eventos-service:10000/eventos', {
     tipo: "ObservacaoCriada",
     dados: observacao
   })
@@ -64,7 +64,7 @@ app.post('/eventos', async (req, res) => {
   try{
     const evento = req.body
     console.log(evento)
-    funcoes[evento.tipo](evento.dados)
+    await funcoes[evento.tipo](evento.dados)
   }
   catch(e){
     console.log(e)

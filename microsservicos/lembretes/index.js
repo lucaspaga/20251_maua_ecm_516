@@ -29,7 +29,7 @@ app.post('/lembretes', (req, res) => {
   const lembrete = { id, texto }
   baseLembretes[id] = lembrete
   id++
-  axios.post('http://localhost:10000/eventos', {
+  axios.post('http://ecm516-barramento-de-eventos-service:10000/eventos', {
     tipo: 'LembreteCriado',
     dados: lembrete
   })
@@ -52,6 +52,8 @@ app.post('/eventos', (req, res) => {
 
 const port = 4000
 app.listen(port, () => {
+  console.log('Nova versão')
+  console.log('Agora usando o Docker Hub')
   console.log(`Lembretes. Porta ${port}.`)
 })
 

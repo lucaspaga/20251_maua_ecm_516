@@ -3,40 +3,42 @@ const express = require ('express')
 const app = express()
 app.use(express.json())
 
-const baseEventos = []
+const eventos = []
 
-app.get('/eventos', (req, res) => {
-  res.json(baseEventos)
-})
-
+//armazenar todos os eventos aqui
 app.post('/eventos', async (req, res) => {
   const evento = req.body
-  baseEventos.push(evento)
   console.log(evento)
+  eventos.push(evento)
   try{
-    await axios.post('http://localhost:4000/eventos', evento)
+    await axios.post('http://ecm516-lembretes-clusterip-service:4000/eventos', evento)
   }
   catch(e){
     console.log(e)
   }
   try {
-    await axios.post('http://localhost:5000/eventos', evento)
+    await axios.post('http://ecm516-lembretes-clusterip-service:5000/eventos', evento)
   } catch (e) {
     console.log(e)
   }
   try{
-    await axios.post('http://localhost:6000/eventos', evento)
+    await axios.post('http://ecm516-lembretes-clusterip-service:6000/eventos', evento)
   }
   catch(e){
     console.log(e)
   }
   try{
-    await axios.post('http://localhost:7000/eventos', evento)
+    await axios.post('http://ecm516-lembretes-clusterip-service:7000/eventos', evento)
   }
   catch(e){
     console.log(e)
   }
   res.end()
+})
+
+//definir um endpoint que viabilize a obtenção da coleção de eventos
+app.get('/eventos', (req, res) => {
+  res.json(eventos)
 })
 
 const port = 10000
